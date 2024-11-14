@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Sell Stocks
+{% endblock %}
+
+{% block main %}
+    <form action="/sell" method="post">
+        <label for="symbol">Symbol: </label>
+        <select class="form-select-sm mb-3" name="symbol" id="symbol">
+            <option selected></option>
+            <option value="nflx">NFLX</option>
+        </select>
+
+        <div class="mb-3">
+            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" name="shares" placeholder="Shares" type="text" pattern="^[1-9]\d*$" required>
+        </div>
+
+        <button class="btn btn-primary" type="submit">Sell</button>
+    </form>
+{% endblock %}

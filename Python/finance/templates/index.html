@@ -1,0 +1,59 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    User Area
+{% endblock %}
+
+{% block main %}
+    <div class="row justify-content-left gap-5 mb-5">
+        <div class="card" style="width: 18rem;">
+            <img src="https://images.pexels.com/photos/4386150/pexels-photo-4386150.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" class="card-img-top" alt="Balance Amount">
+            <div class="card-body">
+                <h5 class="card-title">$ {{ balance }}</h5>
+                <p class="card-text">Balance (USD)</p>
+            </div>
+        </div>
+
+        <div class="card" style="width: 18rem;">
+            <img src="https://images.pexels.com/photos/159888/pexels-photo-159888.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" class="card-img-top" alt="Balance Amount">
+            <div class="card-body">
+                <h5 class="card-title">$ {{ grand_total }}</h5>
+                <p class="card-text">Total Amount (USD)</p>
+            </div>
+        </div>
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Stock</th>
+                <th scope="col">Current Price (USD)</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Amount (USD)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for stock in stocks %}
+                {% if stock.stock_name == "totals" %}
+                <tr>
+                    <td colspan=4></td>
+                </tr>
+                <tr>
+                    <td>Total</td>
+                    <td></td>
+                    <td>{{ stock.stock_share }}</td>
+                    <td>{{ stock.amount }}</td>
+                </tr>
+
+                {% else %}
+                <tr>
+                    <td>{{ stock.stock_name }}</td>
+                    <td>{{ stock.currentPrice }}</td>
+                    <td>{{ stock.stock_share }}</td>
+                    <td>{{ stock.amount }}</td>
+                </tr>
+                {% endif %}
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endblock %}

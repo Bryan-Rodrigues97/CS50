@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scoreboard</title>
+    <style>
+        html, body {
+            /* Takeof default margins and use the entire height */
+            height: 100%;
+            margin: 0;
+        }
+        body {
+            /* Using flexbox */
+            display: flex;
+            flex-direction: column;
+        }
+        .content {
+            /* The main content uses all the availbale size */
+            flex: 1;
+        }
+        table {
+            border-collapse: collapse;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        td {
+            border: 2px solid black;
+            text-align: center;
+            padding: 20px;
+        }
+        .centered {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1 class="centered">Left Team vs. Right Team</h1>
+        <p class="centered">Hey there! Click a button to change the score!</p>
+    </header>
+    <main class="content">
+        <table>
+            <thead>
+                <tr>
+                    <td>Team 1</td>
+                    <td>Team 2</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td id="team1">0</td>
+                    <td id="team2">0</td>
+                </tr>
+                <tr>
+                    <td>
+                        <button id="add1" onclick="handleClick('team1')">+1</button>
+                    </td>
+                    <td>
+                        <button id="add2" onclick="handleClick('team2')">+1</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+    <footer>
+        <p class="centered" style="margin-bottom: 10px;">Made by CS50</p>
+    </footer>
+
+    <script>
+        let team = 0
+
+        function handleClick(id){
+            team = parseInt(document.getElementById(id).innerHTML)
+            team++
+            document.getElementById(id).innerHTML = team
+        }
+        /*
+        let team1 = 0
+        let team2 = 0
+
+        document.querySelector('#add1').addEventListener('click', () => {
+            team1 = parseInt(document.getElementById('team1').innerHTML)
+            if(!isNaN(team1)){
+                team1++;
+                document.getElementById('team1').innerHTML = team1
+            }
+        })
+
+        document.querySelector('#add2').addEventListener('click', () => {
+            team2 = parseInt(document.getElementById('team2').innerHTML)
+            if(!isNaN(team2)){
+                team2++;
+                document.getElementById('team2').innerHTML = team2
+            }
+        })
+        */
+    </script>
+
+</body>
+</html>

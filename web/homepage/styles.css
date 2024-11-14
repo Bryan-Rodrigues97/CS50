@@ -1,0 +1,49 @@
+html, body {
+    /* Takeof default margins and use the entire height */
+    height: 100%;
+    margin: 0;
+}
+body {
+    /* Using flexbox */
+    display: flex;
+    flex-direction: column;
+}
+.content {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    max-width:1200px;
+}
+
+p {
+    text-align: justify;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.img-icon {
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+}
+
+a {
+    text-decoration: none;
+    color: rgb(165, 28, 48);
+}
+
+a:hover{
+    font-weight: 500;
+    color: rgb(165, 28, 48);
+}
+
+.title {
+    font-weight: 900;
+}
+
+.footer {
+    background-color: rgb(165, 28, 48);
+    color: white;
+    margin-top: 50px;
+}

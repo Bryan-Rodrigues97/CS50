@@ -1,0 +1,81 @@
+/* Estilos gerais */
+body {
+    font-family: "Roboto Mono", Arial, sans-serif;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.mainContent {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    padding: 20px;
+    width: 100%;
+    max-width: 400px; /* Limita a largura máxima */
+}
+
+.pwdContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Estilos para o título Password Generator */
+.pwdContainer > span:first-of-type {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+#passwordArea {
+    display: flex;
+    background-color: #CCC;
+    padding: 10px;
+    align-items: center;
+    justify-content: center;
+    height: 35px;
+}
+
+/* Estilos para o span do password gerado */
+#password {
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    display: block;
+}
+
+/* Estilos para o range input */
+#pwdSliderLen {
+    width: 100%;
+}
+
+/* Estilos para as opções de configuração */
+.form-check-label {
+    display: inline-block;
+    margin-bottom: 0;
+}
+
+/* Estilos para o botão de gerar senha */
+button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 25px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+}

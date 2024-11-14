@@ -1,0 +1,25 @@
+Some of the tags that I used
+nav
+div
+a
+button
+span
+q
+hr
+lu
+li
+img
+
+Some of the CSS selectors tha I used
+.content
+.img-icon
+.title
+.footer
+a
+a:hover
+
+Javascript Usage
+I brought into the homepage the development done in the trivia problem set. On this page, I use JavaScript to verify answers. I attempted to use constants and events in JavaScript to create more generic functions.
+
+Bootstrap Usage
+I tried to use Bootstrap across all pages. Since my CSS skills are quite limited, I preferred to consult Bootstrap documentation for styling solutions.

@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block head %}
+    <title>frosh</title>
+{% endblock %}
+{% block body %}
+    <h1>Register</h1>
+    <form action="/register" method="post">
+        <input autocomplete="off" autofocus name="name" placeholder="Name" required>
+        <br>
+        <select name="sport">
+            <option disabled selected value="">Sport</option>
+            {% for sport in sports %}
+                <option value="{{ sport }}">{{ sport }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        {% for shift in shifts %}
+            <input name="shift" type="checkbox" value="{{ shift }}" > {{ shift }}</input>
+        {% endfor%}
+        <br>
+        <button type="input">Register</button>
+    </form>
+{% endblock %}

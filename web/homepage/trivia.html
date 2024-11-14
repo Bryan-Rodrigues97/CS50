@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="trivia.css">
+        <link rel="stylesheet" href="styles.css">
+        <title>Trivia!</title>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                // Responses Array
+                const responses = ['1958', 'ronaldo', 'Argentina', 'South Africa', 'Uruguay']
+
+                // Function that checks the answer for multiple selection questions
+                const handleResponse = (e, arr, answer, result) => {
+                    for(q of arr){
+                        q.style.backgroundColor = '#d9edff'
+                    }
+
+                    if (e.srcElement.innerHTML == answer){
+                        e.srcElement.style.backgroundColor = '#66FF61'
+                        result.innerHTML = 'Correct!'
+                    }
+                    else{
+                        e.srcElement.style.backgroundColor = '#FF6161'
+                        result.innerHTML = 'Incorrect'
+                    }
+                }
+
+
+                // Question 1
+                const q1Questions = document.getElementById('q1-questions').children
+                const q1Res = document.getElementById('q1-result')
+
+                for (q of q1Questions){
+                    q.onclick = (e) => {
+                        handleResponse(e, q1Questions, responses[0], q1Res)
+                    }
+                }
+
+
+                // Question 2
+                const q2r = document.getElementById('q2-r')
+                const q2c = document.getElementById('q2-confirm')
+                const q2res = document.getElementById('q2-result')
+
+                q2r.addEventListener('keypress', () => {
+                    q2r.style.backgroundColor = '#FFF'
+                })
+
+                q2c.addEventListener('click', () => {
+                    if (q2r.value.trim().toLowerCase() == responses[1]){
+                        q2r.style.backgroundColor = '#66FF61'
+                        q2res.innerHTML = 'Correct!'
+                    }
+                    else{
+                        q2r.style.backgroundColor = '#FF6161'
+                        q2res.innerHTML = 'Incorrect!'
+                    }
+                })
+
+
+                // Question 3
+                const q3Questions = document.getElementById('q3-questions').children
+                const q3Res = document.getElementById('q3-result')
+
+                for (q of q3Questions){
+                    q.onclick = (e) => {
+                        handleResponse(e, q3Questions, responses[2], q3Res)
+                    }
+                }
+
+
+                // Question 4
+                const q4Questions = document.getElementById('q4-questions').children
+                const q4Res = document.getElementById('q4-result')
+
+                for (q of q4Questions){
+                    q.onclick = (e) => {
+                        handleResponse(e, q4Questions, responses[3], q4Res)
+                    }
+                }
+
+
+                // Question 5
+                const q5Questions = document.getElementById('q5-questions').children
+                const q5Res = document.getElementById('q5-result')
+
+                for (q of q5Questions){
+                    q.onclick = (e) => {
+                        handleResponse(e, q5Questions, responses[4], q5Res)
+                    }
+                }
+            })
+        </script>
+    </head>
+    <body>
+        <header>
+            <nav class="navbar navbar-expand-lg bg-body-tertiary">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="#">This is CS50 Problem Set 8</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page" href="index.html">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#">Problem Set</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="projects.html">Projects</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="creator.html">Creator</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <div class="header">
+                <h1>Trivia!</h1>
+            </div>
+        </header>
+
+        <main class="container content">
+            <div>
+                <div class="section">
+                    <h2>Part 1: Multiple Choice </h2>
+                    <hr>
+                    <h3>In what year did the Brazilian national team win its first World Cup?</h3>
+                    <div id="q1-questions">
+                        <button id="q1-r1">1958</button>
+                        <button id="q1-r2">1952</button>
+                        <button id="q1-r3">1962</button>
+                        <button id="q1-r4">1970</button>
+                        <button id="q1-r5">1990</button>
+                    </div>
+                    <p id="q1-result"></p>
+                </div>
+
+                <div class="section">
+                    <h2>Part 2: Free Response</h2>
+                    <hr>
+                    <h3>Who was the top scorer of the 2002 World Cup?</h3>
+                    <input id="q2-r" type="text">
+                    <button id="q2-confirm" type="submit">Confirm</button>
+                    <p id="q2-result"></p>
+                </div>
+
+                <div class="section">
+                    <h2>Part 3: Multiple Choice</h2>
+                    <h3>
+                    <h3>Who was the winner of the 2022 World Cup?</h3>
+                    <div id="q3-questions">
+                        <button id="q3-r1">Germany</button>
+                        <button id="q3-r2">France</button>
+                        <button id="q3-r3">Brazil</button>
+                        <button id="q3-r4">Argentina</button>
+                        <button id="q3-r5">Spain</button>
+                    </div>
+                    <p id="q3-result"></p>
+                </div>
+
+                <div class="section">
+                    <h2>Part 4: Multiple Choice</h2>
+                    <hr>
+                    <h3>What was the host country of the 2010 World Cup?</h3>
+                    <div id="q4-questions">
+                        <button id="q4-r1">USA</button>
+                        <button id="q4-r2">France</button>
+                        <button id="q4-r3">Catar</button>
+                        <button id="q4-r4">South Africa</button>
+                        <button id="q4-r5">Italy</button>
+                    </div>
+                    <p id="q4-result"></p>
+                </div>
+
+                <div class="section">
+                    <h2>Part 5: Multiple Choice</h2>
+                    <hr>
+                    <h3>Which was the first national team to win the World Cup?</h3>
+                    <div id="q5-questions">
+                        <button id="q5-r1">Yugoslavia</button>
+                        <button id="q5-r2">Thecoslovakia</button>
+                        <button id="q5-r3">Uruguay</button>
+                        <button id="q5-r4">Hungary</button>
+                        <button id="q5-r5">Argentina</button>
+                    </div>
+                    <p id="q5-result"></p>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p class="text-center">Made for CS50 - Developed by Bryan Rosa</p>
+        </footer>
+    </body>
+</html>

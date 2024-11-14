@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+        <link href="/static/styles.css" rel="stylesheet">
+        <title>Birthdays</title>
+    </head>
+    <body>
+        <div class="header">
+            <h1>Birthdays</h1>
+        </div>
+        <div class="container">
+            <div class="section">
+                <h2>Add a Birthday</h2>
+                <form action="/" method="post" id="insertForm">
+                    <input type="text" name="name" autofocus placeholder="Name" required>
+                    <input type="number" name="month" placeholder="Month" id="month" required min="1" max="12">
+                    <input type="number" name="day" placeholder="Day" id="day" required min="1" max="31">
+                    <button type="submit">Add Birthday</button>
+                </form>
+            </div>
+            <div class="section">
+                <h2>All Birthdays</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Birthday</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for birthday in birthdays %}
+                            <tr>
+                                <td>{{ birthday.name }}</td>
+                                <td><input value="{{ birthday.day}}/{{ birthday.month }}" id="input-{{birthday.id}}" disabled>
+                                <td>
+                                    <form action="/" method="get">
+                                        <button style="color: green" class="editBtn" id="editBtn-{{birthday.id}}" value="{{birthday.id}}">Edit</button>
+                                    </form>
+                                </td>
+                                <td>
+                                    <form action="/delete/{{ birthday.id }}" method="post">
+                                        <button style="color: red">Delete</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <script>
+            function isValidDate(month, day) {
+                if ((month < 1 || month > 12) || (day < 1 || day > 31)) {
+                    return false
+                }
+                const date = new Date(2024, month-1, day)
+                return date.getMonth()+1 === month && date.getDate() === day
+            }
+
+            async function edit(e){
+                const btn = document.getElementById(e.srcElement.id)
+                const input = document.getElementById(`input-${btn.value}`)
+                const id = btn.value
+
+                if (btn.innerText == 'Edit'){
+                    btn.innerText = 'Save'
+                    input.disabled = false
+                    e.preventDefault();
+                }
+                else{
+                    btn.innerText = 'Edit'
+                    input.disabled = true
+
+                    console.log(`Saving ${id}`)
+                    const splitDate = input.value.split('/')
+                    console.log(splitDate)
+
+                    if (!isValidDate( Number(splitDate[1]), Number(splitDate[0]) )){
+                        alert("Oops, it seems the birth date you provided is not valid.")
+                    }
+                    else{
+                        e.preventDefault();
+                        await fetch(`/update/${id}`, {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json"
+                            },
+                            body: JSON.stringify({ day: Number(splitDate[0]), month: Number(splitDate[1]) })
+                        });
+                    }
+                }
+            }
+
+            document.querySelector("#insertForm").addEventListener("submit", (e)=>{
+                const day = Number(document.querySelector("#day").value)
+                const mth = Number(document.querySelector("#month").value)
+
+                if (!isValidDate(mth, day)){
+                    alert("Oops, it seems the birth date you provided is not valid.")
+                    e.preventDefault()
+                }
+            })
+
+            document.querySelectorAll(".editBtn").forEach((element) => {
+                element.addEventListener("click",(e) => edit(e));
+            });
+
+        </script>
+    </body>
+</html>

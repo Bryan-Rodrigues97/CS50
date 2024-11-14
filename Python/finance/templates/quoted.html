@@ -1,0 +1,9 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    {{ symbol }} Quotation
+{% endblock %}
+
+{% block main %}
+    <h1>Current <span class="badge text-bg-secondary">{{ symbol }}</span> price is USD {{ price }}</h1>
+{% endblock %}
