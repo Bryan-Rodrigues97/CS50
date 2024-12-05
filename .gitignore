@@ -2,3 +2,13 @@ Utils
 project
 libcs50-11.0.2
 .DS_Store
+CS50-AI/.DS_Stor
+CS50-AI/.DS_Store
+project-v2/AI/emnist/emnist-byclass-mapping.txt
+project-v2/AI/emnist/emnist-byclass-test-images-idx3-ubyte
+project-v2/AI/emnist/emnist-byclass-test-labels-idx1-ubyte
+project-v2/AI/emnist/emnist-byclass-train-images-idx3-ubyte
+project-v2/AI/emnist/emnist-byclass-train-labels-idx1-ubyte
+Python/traffic/.DS_Store
+Python/traffic/gtsrb/.DS_Store
+project-v2/__pycache__

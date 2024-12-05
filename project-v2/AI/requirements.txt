@@ -1,0 +1,4 @@
+tensorflow
+idx2numpy
+PILLOW
+numpy
