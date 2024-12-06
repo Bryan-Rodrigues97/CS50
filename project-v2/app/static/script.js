@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const resultDiv = document.getElementById('result');
     const resultLabelSpan = document.getElementById('resultLabelSpan');
     const asciiCodeSpan = document.getElementById('asciiCodeSpan');
+    const emnistClass = document.getElementById('emnistClass')
 
     let drawing = false;
 
@@ -69,6 +70,7 @@ document.addEventListener('DOMContentLoaded', function() {
         resultDiv.hidden = false
         resultLabelSpan.innerText = data.label
         asciiCodeSpan.innerText = data.ascii_code
+        emnistClass.innerText = data.emnist_class
       })
       .catch(error => console.error('Error:', error));
     });

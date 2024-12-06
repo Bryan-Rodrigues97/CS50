@@ -32,12 +32,13 @@ def preprocess_image_from_base64(base64_string):
     return img_array
 
 def predict_image_from_base64(base64_string):
-    model = tf.keras.models.load_model(os.path.join('AI', 'model.h5'))
+    model = tf.keras.models.load_model(os.path.join('AI', 'emnist.h5'))
     img_array = preprocess_image_from_base64(base64_string)
     predictions = model.predict(img_array)
     predicted_class = np.argmax(predictions)
     
     return {
-        "ascii_code": int(predicted_class),
-        "label": emnist_dict[predicted_class]
+        "emnist_class": int(predicted_class),
+        "label": emnist_dict[predicted_class],
+        "ascii_code": ord(emnist_dict[predicted_class])
     }

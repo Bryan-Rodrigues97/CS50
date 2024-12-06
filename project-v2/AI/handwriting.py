@@ -7,6 +7,8 @@ TRAIN_LABELS_PATH = 'emnist/emnist-byclass-train-labels-idx1-ubyte'
 TEST_IMAGES_PATH = 'emnist/emnist-byclass-test-images-idx3-ubyte'
 TEST_LABELS_PATH = 'emnist/emnist-byclass-test-labels-idx1-ubyte'
 
+NUM_CLASSES = 62
+
 # Carregamento  do dataset
 def load_emnist_images(image_file, label_file):
     images = idx2numpy.convert_from_file(image_file)
@@ -16,11 +18,10 @@ def load_emnist_images(image_file, label_file):
     return images, labels
 
 # Pré processamento
-def preprocess(images, labels):
-    num_classes = 62                                    # EMNIST byclass tem 62 classes
+def preprocess(images, labels):                           
     images = tf.image.rot90(images, k=3)                # Rotação de 270 graus
-    images = tf.image.random_flip_left_right(images)    # Flip horizontal aleatório
-    labels = tf.one_hot(labels, depth=num_classes)      # Converter rótulos para one-hot encoding
+    images = tf.image.flip_left_right(images)           # Flip horizontal
+    labels = tf.one_hot(labels, depth=NUM_CLASSES)      # Converter rótulos para one-hot encoding
     return images, labels
 
 # Criar uma rede neural convolucional
@@ -33,9 +34,9 @@ def createModel():
         tf.keras.layers.Conv2D(256, (3, 3), activation="relu"),
         tf.keras.layers.MaxPooling2D(pool_size=(2, 2)),
         tf.keras.layers.Flatten(),
-        tf.keras.layers.Dense(256, activation="relu"),
+        tf.keras.layers.Dense(512, activation="relu"),
         tf.keras.layers.Dropout(0.5),
-        tf.keras.layers.Dense(62, activation="softmax")
+        tf.keras.layers.Dense(NUM_CLASSES, activation="sigmoid")
     ])
 
     return model
@@ -44,17 +45,16 @@ if __name__ == "__main__":
     # Dados de treino e teste
     x_train, y_train = load_emnist_images(TRAIN_IMAGES_PATH, TRAIN_LABELS_PATH)
     x_test, y_test = load_emnist_images(TEST_IMAGES_PATH, TEST_LABELS_PATH)
-
+    
     # Criar pipeline de dados para treinamento
     train_dataset = tf.data.Dataset.from_tensor_slices((x_train, y_train))
     train_dataset = train_dataset.map(preprocess).batch(64).shuffle(10000).prefetch(tf.data.AUTOTUNE)
-
+    
     # Criar pipeline de dados para teste (sem augmentação)
     test_dataset = tf.data.Dataset.from_tensor_slices((x_test, y_test))
     test_dataset = test_dataset.map(lambda x, y: (x, tf.one_hot(y, depth=62))).batch(64).prefetch(tf.data.AUTOTUNE)
 
     model = createModel()
-
     model.compile(
         optimizer="adam",
         loss="categorical_crossentropy",
@@ -65,4 +65,3 @@ if __name__ == "__main__":
 
     # Salvar o modelo em um arquivo
     model.save("emnist.h5")  
-    print("Modelo salvo como 'emnist.h5'.")
